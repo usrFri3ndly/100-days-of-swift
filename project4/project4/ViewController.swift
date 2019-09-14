@@ -97,6 +97,13 @@ class ViewController: UIViewController, WKNavigationDelegate {
                 }
             }
         }
+        // block websites that aren't in website array
+        // exclude about:blank
+        if url!.absoluteString != "about:blank" {
+            let ac = UIAlertController(title: "⛔️ Unauthorised Access", message: "Access to \(url!) is restricted.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Return", style: .default, handler: nil))
+            present(ac, animated: true)
+        }
         decisionHandler(.cancel)
     }
 }
