@@ -39,10 +39,12 @@ class ViewController: UIViewController, WKNavigationDelegate {
         
         // Tool bar items
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let back = UIBarButtonItem(title: "Back", style: .plain, target: webView, action: #selector(goBack))
+        let forward = UIBarButtonItem(title: "Forward", style: .plain, target: webView, action: #selector(goForward))
         let refresh = UIBarButtonItem(barButtonSystemItem: .refresh, target: webView, action: #selector(webView.reload))
         
         // Tool bar array
-        toolbarItems = [progressButton, spacer, refresh]
+        toolbarItems = [progressButton, spacer, back, forward, spacer, refresh]
         navigationController?.isToolbarHidden = false
         
         // KVO - observe page load time
@@ -54,6 +56,22 @@ class ViewController: UIViewController, WKNavigationDelegate {
         webView.load(URLRequest(url: url))
         // allow navigation
         webView.allowsBackForwardNavigationGestures = true
+    }
+    
+    // naivgate back if possible
+    @objc func goBack() {
+        if webView.canGoBack
+        {
+            webView.goBack()
+        }
+    }
+    
+    // navigate forward if possible
+    @objc func goForward() {
+        if webView.canGoForward
+        {
+            webView.goForward()
+        }
     }
 
     // open button method
