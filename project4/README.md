@@ -22,3 +22,9 @@
 > For more of a challenge, try changing the initial view controller to a table view like in project 1, where users can choose their website from a list rather than just having the first in the array loaded up front.
 
 [Commit](https://github.com/usrFri3ndly/100-days-of-swift/commit/b6bfc440c8688b8feeacf8203436f058c26cb65b#diff-ace990e5ec777f36b5f3bce0a6c2bddd)
+
+## Resources
+
+https://developer.apple.com/documentation/webkit/wkwebview
+https://developer.apple.com/documentation/swift/cocoa_design_patterns/using_key-value_observing_in_swift
+https://www.hackingwithswift.com/100/17
