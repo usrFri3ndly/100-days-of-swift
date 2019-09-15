@@ -12,11 +12,12 @@ import WebKit
 class ViewController: UIViewController, WKNavigationDelegate {
     
     // create web and progress views
-    var webView: WKWebView!
+    @IBOutlet var webView: WKWebView!
+    var selectedWebsite: String?
     var progressView: UIProgressView!
     
     // array of authorised websites
-    var websites = ["apple.com", "hackingwithswift.com"]
+    var websites = ["hackingwithswift.com", "raywenderlich.com", "swiftbysundell.com", "useyourloaf.com", "udemy.com"]
     
     // create instance of class and make webview the view for view controller
     override func loadView() {
@@ -51,7 +52,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
         
         // store location of url
-        let url = URL(string: "https://www." + websites[0])!
+        let url = URL(string: "https://www." + selectedWebsite!)!
         // url request
         webView.load(URLRequest(url: url))
         // allow navigation

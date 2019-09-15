@@ -12,6 +12,7 @@
 		82BD5C41232CE64D0018EE78 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82BD5C3F232CE64D0018EE78 /* Main.storyboard */; };
 		82BD5C43232CE6560018EE78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82BD5C42232CE6560018EE78 /* Assets.xcassets */; };
 		82BD5C46232CE6560018EE78 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82BD5C44232CE6560018EE78 /* LaunchScreen.storyboard */; };
+		82C0F141232E6E5E00B084D0 /* tableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C0F140232E6E5E00B084D0 /* tableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		82BD5C42232CE6560018EE78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		82BD5C45232CE6560018EE78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		82BD5C47232CE6560018EE78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		82C0F140232E6E5E00B084D0 /* tableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 				82BD5C3B232CE64D0018EE78 /* AppDelegate.swift */,
 				82BD5C3D232CE64D0018EE78 /* ViewController.swift */,
 				82BD5C3F232CE64D0018EE78 /* Main.storyboard */,
+				82C0F140232E6E5E00B084D0 /* tableViewController.swift */,
 				82BD5C42232CE6560018EE78 /* Assets.xcassets */,
 				82BD5C44232CE6560018EE78 /* LaunchScreen.storyboard */,
 				82BD5C47232CE6560018EE78 /* Info.plist */,
@@ -135,6 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82C0F141232E6E5E00B084D0 /* tableViewController.swift in Sources */,
 				82BD5C3E232CE64D0018EE78 /* ViewController.swift in Sources */,
 				82BD5C3C232CE64D0018EE78 /* AppDelegate.swift in Sources */,
 			);
