@@ -73,34 +73,38 @@ class ViewController: UITableViewController {
     func submit(_ answer: String) {
         let lowerAnswer = answer.lowercased()
         
-        let errorTitle: String
-        let errorMessage: String
-        
         // ensure word conditions are met
-        if isPossible(word: lowerAnswer) {
-            if isOriginal(word: lowerAnswer) {
-                if isReal(word: lowerAnswer) {
-                    // insert into usedWords at top of table
-                    usedWords.insert(answer, at: 0)
-                    
-                    // create new row to show new cell rather than reloading whole
-                    let indexPath = IndexPath(row: 0, section: 0)
-                    tableView.insertRows(at: [indexPath], with: .automatic)
-                    
-                    return
-                } else {
-                    errorTitle = "Word not recognised..."
-                    errorMessage = "Word is invalid or too short!"
-                }
-            } else {
-                errorTitle = "Word not original..."
-                errorMessage = "It's already been used!"
-            }
-        } else {
-            errorTitle = "Word not possible"
-            errorMessage = "You can't spell that from \(title!.lowercased())"
+        if lowerAnswer == title {
+            return showErrorMessage(errorTitle: "No Cheating", errorMessage: "Your answer can't include the game word!")
         }
         
+        if lowerAnswer.count < 3 {
+                return showErrorMessage(errorTitle: "Answer Too Short", errorMessage: "Answers must be at least 3 characters.")
+        }
+        
+        if !isPossible(word: lowerAnswer) {
+            return showErrorMessage(errorTitle: "Answer Not Possible", errorMessage: "You can't spell '\(lowerAnswer)' from '\(title!.lowercased())'.")
+        }
+        
+        if !isOriginal(word: lowerAnswer) {
+            return showErrorMessage(errorTitle: "Answer Not Original", errorMessage: "You've already used this one!")
+        }
+        
+        if !isReal(word: lowerAnswer)
+        {
+            return showErrorMessage(errorTitle: "Answer Not Recognised", errorMessage: "Is this even a real word?")
+        } else {
+            //insert into usedWords at top of table
+            usedWords.insert(answer, at: 0)
+            // create new row to show new cell rather than reloading whole
+            let indexPath = IndexPath(row: 0, section: 0)
+            tableView.insertRows(at: [indexPath], with: .automatic)
+            return
+        }
+    }
+
+    // display error message with returned values
+    func showErrorMessage(errorTitle: String, errorMessage: String) -> Void {
         let ac = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default))
         present(ac, animated: true)
@@ -127,23 +131,11 @@ class ViewController: UITableViewController {
     }
     
     func isReal(word: String) -> Bool {
-        // check if answer is same as title[game] word
-        if word == title {
-            return false
-        } else {
-            // check answer length
-            if word.count < 3 {
-                return false
-            } else {
                 let checker = UITextChecker()
                 // scan range for checker
                 let range = NSRange(location: 0, length: word.utf16.count)
                 let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
                 return misspelledRange.location == NSNotFound
-            }
-        }
-        
     }
-    
 }
 
