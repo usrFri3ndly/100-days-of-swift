@@ -89,8 +89,8 @@ class ViewController: UITableViewController {
                     
                     return
                 } else {
-                    errorTitle = "Word not recognised"
-                    errorMessage = "No made up words!"
+                    errorTitle = "Word not recognised..."
+                    errorMessage = "Word is invalid or too short!"
                 }
             } else {
                 errorTitle = "Word not original..."
@@ -126,13 +126,23 @@ class ViewController: UITableViewController {
         return !usedWords.contains(word)
     }
     
-    //
     func isReal(word: String) -> Bool {
-        let checker = UITextChecker()
-        // scan range for checker
-        let range = NSRange(location: 0, length: word.utf16.count)
-        let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
-        return misspelledRange.location == NSNotFound
+        // check if answer is same as title[game] word
+        if word == title {
+            return false
+        } else {
+            // check answer length
+            if word.count < 3 {
+                return false
+            } else {
+                let checker = UITextChecker()
+                // scan range for checker
+                let range = NSRange(location: 0, length: word.utf16.count)
+                let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
+                return misspelledRange.location == NSNotFound
+            }
+        }
+        
     }
     
 }
