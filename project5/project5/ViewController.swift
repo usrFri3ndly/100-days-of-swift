@@ -18,6 +18,7 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(promptForAnswer))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(startGame))
         
         // look for file with extension
         if let startWordsURL = Bundle.main.url(forResource: "start", withExtension: "txt") {
@@ -35,7 +36,7 @@ class ViewController: UITableViewController {
     }
     
     // pick random word when game starts and clear any previous values
-    func startGame() {
+    @objc func startGame() {
         title = allWords.randomElement()
         usedWords.removeAll(keepingCapacity: true)
         tableView.reloadData()
