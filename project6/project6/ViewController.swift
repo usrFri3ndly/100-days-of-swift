@@ -75,8 +75,8 @@ class ViewController: UIViewController {
         
         // loop over labels and assign width & height
         for label in [label1, label2, label3, label4, label5] {
-            label.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-            label.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            label.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+            label.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
             label.heightAnchor.constraint(equalToConstant: 88).isActive = true
             
             // top anchor of each label = bottom anchor of previous label
