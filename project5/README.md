@@ -25,5 +25,5 @@
 
 ## Resources
 
-https://www.youtube.com/watch?v=fVF_tNcIhfc
+https://www.youtube.com/watch?v=fVF_tNcIhfc  
 https://www.hackingwithswift.com/100/6
