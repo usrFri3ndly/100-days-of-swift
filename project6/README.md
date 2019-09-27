@@ -1,6 +1,6 @@
 # Project 6 - Auto Layout
 
-![App Screenshot](https://raw.githubusercontent.com/usrFri3ndly/100-days-of-swift/master/project6/screenshot.png)
+![App Screenshot 1](https://raw.githubusercontent.com/usrFri3ndly/100-days-of-swift/master/project6/screenshot.png)
 
 ## Challenges
 
