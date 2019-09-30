@@ -15,6 +15,9 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // credits button
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Credits", style: .plain, target: self, action: #selector(credits))
+        
         // load json url and return contents
         let urlString: String
         if navigationController?.tabBarItem.tag == 0 {
@@ -33,6 +36,16 @@ class ViewController: UITableViewController {
         } else {
             showError()
         }
+    }
+    
+    // function to show credits
+    @objc func credits() {
+        let ac = UIAlertController(title: nil, message: "Information obtained from 'We The People' API of the Whitehouse", preferredStyle: .alert)
+        let backButton = UIAlertAction(title: "Back", style: .cancel)
+
+        // show ac and button
+        ac.addAction(backButton)
+        present(ac, animated: true)
     }
     
     func showError() {
