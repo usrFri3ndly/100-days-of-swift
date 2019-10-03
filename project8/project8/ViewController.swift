@@ -188,8 +188,12 @@ class ViewController: UIViewController {
                 ac.addAction(UIAlertAction(title: "Lets Go!", style: .default, handler: levelUp))
                 present (ac, animated: true)
             }
+        // show alert if guess incorrect
+        } else {
+            let ac = UIAlertController(title: "Oops!", message: "Not quite right.. Try again :)", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Continue", style: .cancel))
+            present (ac, animated: true)
         }
-
     }
     
     // load next level
