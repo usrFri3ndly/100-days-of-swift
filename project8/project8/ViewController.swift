@@ -19,7 +19,12 @@ class ViewController: UIViewController {
     var activatedButtons = [UIButton]()
     var solutions = [String]()
     
-    var score = 0
+    var correctAnswers = 0
+    var score = 0 {
+        didSet {
+            scoreLabel.text = "Score: \(score)"
+        }
+    }
     var level = 1
     
     override func loadView() {
@@ -181,9 +186,10 @@ class ViewController: UIViewController {
             
             currentAnswer.text = ""
             score += 1
+            correctAnswers += 1
             
-            // if score divids into 7 evenly go to next level
-            if score % 7 == 0 {
+            // if correctAnswers divides into 7 evenly go to next level
+            if correctAnswers % 7 == 0 {
                 let ac = UIAlertController(title: "Well done!", message: "Are you ready for the next level?", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "Lets Go!", style: .default, handler: levelUp))
                 present (ac, animated: true)
@@ -193,6 +199,8 @@ class ViewController: UIViewController {
             let ac = UIAlertController(title: "Oops!", message: "Not quite right.. Try again :)", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "Continue", style: .cancel))
             present (ac, animated: true)
+            // deduct from score
+            score -= 1
         }
     }
     
