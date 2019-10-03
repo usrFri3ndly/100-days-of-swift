@@ -81,13 +81,14 @@ class ViewController: UIViewController {
         buttonsView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(buttonsView)
         
-        // FOR TESTING
+        /* FOR TESTING
         currentAnswer.backgroundColor = .green
         answersLabel.backgroundColor = .blue
         cluesLabel.backgroundColor = .red
         submit.backgroundColor = .yellow
         clear.backgroundColor = .cyan
         buttonsView.backgroundColor = .orange
+        */
         
         NSLayoutConstraint.activate([
             scoreLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
@@ -135,6 +136,10 @@ class ViewController: UIViewController {
                 let letterButton = UIButton(type: .system)
                 letterButton.titleLabel?.font = UIFont.systemFont(ofSize: 36)
                 letterButton.setTitle("WWW", for: .normal)
+                letterButton.backgroundColor = UIColor(red: 0.64, green: 0.47, blue: 0.45, alpha: 1.0)
+                letterButton.tintColor = .white
+                letterButton.layer.borderWidth = 0.5
+                letterButton.layer.borderColor = UIColor.white.cgColor
                 letterButton.addTarget(self, action: #selector(letterTapped), for: .touchUpInside)
                 
                 // create button frame
