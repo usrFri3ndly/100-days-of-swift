@@ -1,6 +1,6 @@
 # Project 8 - 7 Swifty Words
 
-![App Screenshot 1](https://raw.githubusercontent.com/usrFri3ndly/100-days-of-swift/master/project8/screenshot-newgame.png)
+![App Screenshot 1](https://raw.githubusercontent.com/usrFri3ndly/100-days-of-swift/master/project8/screenshot-newGame.png)
 ![App Screenshot 2](https://raw.githubusercontent.com/usrFri3ndly/100-days-of-swift/master/project8/screenshot-incorrect.png)
 
 ## Challenges
