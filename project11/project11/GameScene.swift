@@ -77,6 +77,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // read first touch and look for location
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
+        let xLocation = touch.location(in:self).x
         // checkwhat node exists at this location
         let objects = nodes(at: location)
         
@@ -105,7 +106,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 ball.physicsBody?.restitution = 0.4
                 // bounce off everything that has a physics body and detect collisions
                 ball.physicsBody?.contactTestBitMask = ball.physicsBody?.collisionBitMask ?? 0
-                ball.position = location
+                ball.position = CGPoint(x: xLocation, y: 750)
                 ball.name = "ball"
                 addChild(ball)
             }
