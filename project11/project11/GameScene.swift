@@ -11,6 +11,9 @@ import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
+    // ball array
+    let ballColours = ["ballBlue", "ballCyan", "ballGreen", "ballGrey", "ballPurple", "ballRed", "ballYellow"]
+    
     // score
     var scoreLabel: SKLabelNode!
     var score = 0 {
@@ -95,8 +98,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 box.physicsBody?.isDynamic = false
                 addChild(box)
             } else {
-                // create bouncy red ball in touch location
-                let ball = SKSpriteNode(imageNamed: "ballRed")
+                // create bouncy ball with random colour in touch location
+                let ball = SKSpriteNode(imageNamed: ballColours.randomElement()!)
                 ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.width / 2.0)
                 // restitution = bouncyness
                 ball.physicsBody?.restitution = 0.4
