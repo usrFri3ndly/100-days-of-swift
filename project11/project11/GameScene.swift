@@ -14,13 +14,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // ball array
     let ballColours = ["ballBlue", "ballCyan", "ballGreen", "ballGrey", "ballPurple", "ballRed", "ballYellow"]
     
-    // score
-    var scoreLabel: SKLabelNode!
-    var score = 0 {
+    // balls remaining
+    var ballsRemainingLabel: SKLabelNode!
+    var ballsRemaining = 5 {
         didSet {
-            scoreLabel.text = "Score: \(score)"
+            ballsRemainingLabel.text = "Balls: \(ballsRemaining)"
         }
     }
+    
+    // number of boxes remaining
+    var boxesRemaining = 0
     
     // editing mode
     var editLabel: SKLabelNode!
@@ -33,6 +36,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
+    
+    // game win/lose labels
+    var gameLoseLabel: SKLabelNode!
+    var gameWinLabel: SKLabelNode!
 
     override func didMove(to view: SKView) {
         // add background in center
@@ -44,17 +51,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         background.zPosition = -1
         addChild(background)
         
-        // add and position score label
-        scoreLabel = SKLabelNode(fontNamed: "Chalkduster")
-        scoreLabel.text = "Score: 0"
-        scoreLabel.horizontalAlignmentMode = .right
-        scoreLabel.position = CGPoint(x: 980, y: 700)
-        addChild(scoreLabel)
+        // add and position balls remaining label
+        ballsRemainingLabel = SKLabelNode(fontNamed: "Chalkduster")
+        ballsRemainingLabel.text = "Balls: 5"
+        ballsRemainingLabel.horizontalAlignmentMode = .right
+        ballsRemainingLabel.position = CGPoint(x: 980, y: 720)
+        addChild(ballsRemainingLabel)
         
         // add and position edit label
         editLabel = SKLabelNode(fontNamed: "Chalkduster")
         editLabel.text = "Edit"
-        editLabel.position = CGPoint(x: 80, y: 700)
+        editLabel.position = CGPoint(x: 80, y: 720)
         addChild(editLabel)
         
         physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
@@ -97,13 +104,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 box.physicsBody = SKPhysicsBody(rectangleOf: box.size)
                 // static box
                 box.physicsBody?.isDynamic = false
+                box.name = "box"
                 addChild(box)
+                boxesRemaining += 1
+                //print(boxesRemaining)
             } else {
                 // create bouncy ball with random colour in touch location
                 let ball = SKSpriteNode(imageNamed: ballColours.randomElement()!)
                 ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.width / 2.0)
                 // restitution = bouncyness
-                ball.physicsBody?.restitution = 0.4
+                ball.physicsBody?.restitution = 0.6
                 // bounce off everything that has a physics body and detect collisions
                 ball.physicsBody?.contactTestBitMask = ball.physicsBody?.collisionBitMask ?? 0
                 ball.position = CGPoint(x: xLocation, y: 750)
@@ -162,11 +172,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func collision(between ball: SKNode, object: SKNode) {
         if object.name == "good" {
             destroy(ball: ball)
-            score += 1
+            ballsRemaining += 1
         } else if object.name == "bad" {
             destroy(ball: ball)
-            score -= 1
+            ballsRemaining -= 1
+        } else if object.name == "box" {
+            //print("I just hit a box!")
+            destroy(box: object)
         }
+        
+        // check if there are balls remaining
+        if ballsRemaining == 0 {
+            gameLose()
+        }
+        
     }
     
     // remove node from node tree
@@ -177,6 +196,43 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             addChild(fireParticles)
         }
         ball.removeFromParent()
+    }
+    
+    // remove box from parent and check how many remain
+    func destroy(box: SKNode) {
+        box.removeFromParent()
+        boxesRemaining -= 1
+        
+        // check if player has removed all boxes
+        if boxesRemaining == 0
+        {
+            gameWin()
+        }
+    }
+    
+    // player looses
+    func gameLose() {
+        // print("You Lose. Continue?")
+        gameLoseLabel = SKLabelNode(fontNamed: "Chalkduster")
+        gameLoseLabel.text = "YOU LOSE!"
+        gameLoseLabel.fontSize = 56
+        gameLoseLabel.fontColor = .red
+        gameLoseLabel.horizontalAlignmentMode = .center
+        gameLoseLabel.position = CGPoint(x: 512, y: 384)
+        addChild(gameLoseLabel)
+    }
+    
+    // player wins
+    func gameWin()
+    {
+        // print("You Lose. Continue?")
+        gameWinLabel = SKLabelNode(fontNamed: "Chalkduster")
+        gameWinLabel.text = "YOU WIN!"
+        gameWinLabel.fontSize = 56
+        gameWinLabel.fontColor = .green
+        gameWinLabel.horizontalAlignmentMode = .center
+        gameWinLabel.position = CGPoint(x: 512, y: 384)
+        addChild(gameWinLabel)
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
