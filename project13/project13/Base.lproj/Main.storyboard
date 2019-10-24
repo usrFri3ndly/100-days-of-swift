@@ -45,10 +45,10 @@
                                     <action selector="intensityChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="KPb-98-biK"/>
                                 </connections>
                             </slider>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wnZ-f1-bJg">
-                                <rect key="frame" x="20" y="798" width="120" height="44"/>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" restorationIdentifier="filterTitle" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wnZ-f1-bJg">
+                                <rect key="frame" x="20" y="798" width="200" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="fKX-BH-aL8"/>
+                                    <constraint firstAttribute="width" constant="200" id="fKX-BH-aL8"/>
                                     <constraint firstAttribute="height" constant="44" id="nig-bx-gQY"/>
                                 </constraints>
                                 <state key="normal" title="Change Filter"/>
@@ -56,10 +56,10 @@
                                     <action selector="changeFilter:" destination="BYZ-38-t0r" eventType="touchUpInside" id="A5m-gj-Vyc"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PYr-RY-Nk3">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PYr-RY-Nk3">
                                 <rect key="frame" x="334" y="798" width="60" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="C5S-l8-WL8"/>
+                                    <constraint firstAttribute="width" constant="60" id="HXw-Ky-tcw"/>
                                 </constraints>
                                 <state key="normal" title="Save"/>
                                 <connections>
@@ -70,9 +70,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="2hC-GR-GZ6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AvG-BM-N7v"/>
-                            <constraint firstItem="wnZ-f1-bJg" firstAttribute="baseline" secondItem="PYr-RY-Nk3" secondAttribute="firstBaseline" id="F2w-PY-NXb"/>
                             <constraint firstItem="jtk-eY-Oc2" firstAttribute="top" secondItem="2hC-GR-GZ6" secondAttribute="bottom" constant="53" id="H4w-EC-NAL"/>
                             <constraint firstItem="wnZ-f1-bJg" firstAttribute="top" secondItem="z0N-g4-DHC" secondAttribute="bottom" constant="11" id="I9u-md-FHN"/>
+                            <constraint firstItem="PYr-RY-Nk3" firstAttribute="firstBaseline" secondItem="wnZ-f1-bJg" secondAttribute="baseline" id="Qsx-Ka-Lkc"/>
                             <constraint firstItem="z0N-g4-DHC" firstAttribute="leading" secondItem="wnZ-f1-bJg" secondAttribute="leading" id="ToC-yp-XBM"/>
                             <constraint firstItem="2hC-GR-GZ6" firstAttribute="leading" secondItem="z0N-g4-DHC" secondAttribute="leading" id="XwC-nE-RDm"/>
                             <constraint firstItem="z0N-g4-DHC" firstAttribute="top" secondItem="2hC-GR-GZ6" secondAttribute="bottom" constant="58" id="b5O-sl-aX8"/>
@@ -80,15 +80,16 @@
                             <constraint firstItem="2hC-GR-GZ6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="cOM-6u-C5H"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="wnZ-f1-bJg" secondAttribute="bottom" constant="20" id="fI3-au-SgD"/>
                             <constraint firstItem="jtk-eY-Oc2" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="iII-Tm-Ilc"/>
-                            <constraint firstItem="jtk-eY-Oc2" firstAttribute="trailing" secondItem="PYr-RY-Nk3" secondAttribute="trailing" id="neR-Ns-JoJ"/>
+                            <constraint firstItem="PYr-RY-Nk3" firstAttribute="trailing" secondItem="jtk-eY-Oc2" secondAttribute="trailing" id="ify-gE-Unw"/>
                             <constraint firstItem="wnZ-f1-bJg" firstAttribute="top" secondItem="jtk-eY-Oc2" secondAttribute="bottom" constant="8" id="pZY-1h-7lB"/>
-                            <constraint firstItem="wnZ-f1-bJg" firstAttribute="top" secondItem="PYr-RY-Nk3" secondAttribute="top" id="uYK-PL-20m"/>
+                            <constraint firstItem="PYr-RY-Nk3" firstAttribute="top" secondItem="wnZ-f1-bJg" secondAttribute="top" id="yUf-pm-VxR"/>
                             <constraint firstItem="jtk-eY-Oc2" firstAttribute="leading" secondItem="z0N-g4-DHC" secondAttribute="trailing" constant="6" id="z93-bO-deO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="SLK-pj-IGg"/>
                     <connections>
+                        <outlet property="filterLabel" destination="wnZ-f1-bJg" id="pph-6E-Zhs"/>
                         <outlet property="imageView" destination="cm2-D1-dST" id="7xg-P3-Cfg"/>
                         <outlet property="intensity" destination="jtk-eY-Oc2" id="jam-dT-3WP"/>
                     </connections>

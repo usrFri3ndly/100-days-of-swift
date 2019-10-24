@@ -16,6 +16,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet var intensity: UISlider!
     var currentImage: UIImage!
     
+    @IBOutlet var filterLabel: UIButton!
     // core image components
     var context: CIContext!
     var currentFilter: CIFilter!
@@ -83,6 +84,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // apply filter to image
         let beginImage = CIImage(image: currentImage)
         currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
+        filterLabel.setTitle("Filter: \(actionTitle)", for: .normal)
         applyProcessing()
         
     }
