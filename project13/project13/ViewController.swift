@@ -14,6 +14,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var intensity: UISlider!
+    @IBOutlet var radius: UISlider!
     var currentImage: UIImage!
     
     @IBOutlet var filterLabel: UIButton!
@@ -94,7 +95,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // unwrap image to avoid crashing
         guard let image = imageView.image else {
             // print("No Image Selected.")
-            let ac = UIAlertController(title: "No Image Found.", message: "Please select an image from your Photo Library by tapping on the '+' button.", preferredStyle: .alert)
+            let ac = UIAlertController(title: "No Image Found", message: "Please select an image from your Photo Library by tapping on the '+' button.", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "Okay", style: .default))
             present(ac, animated: true)
             return
@@ -105,6 +106,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func intensityChanged(_ sender: Any) {
         applyProcessing()
     }
+    
+    @IBAction func radiusChanged(_ sender: Any) {
+        applyProcessing()
+    }
+    
     
     // Core Iamge > Core Graphics > UIImage
     func applyProcessing() {
@@ -118,7 +124,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         // radius
         if inputKeys.contains(kCIInputRadiusKey) {
-            currentFilter.setValue(intensity.value * 200, forKey: kCIInputRadiusKey)
+            currentFilter.setValue(radius.value * 200, forKey: kCIInputRadiusKey)
         }
         
         if inputKeys.contains(kCIInputScaleKey) {
@@ -130,9 +136,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             currentFilter.setValue(CIVector(x: currentImage.size.width / 2, y: currentImage.size.height / 2), forKey: kCIInputCenterKey)
         }
         
+        
+        guard let outputImage = currentFilter.outputImage else { return }
         // pass value of slider as intensity for filter
         // create CGImage from filter
-        if let cgImage = context.createCGImage(currentFilter.outputImage!, from: currentFilter.outputImage!.extent) {
+        if let cgImage = context.createCGImage(outputImage, from: outputImage.extent) {
                 // convert to UIImage and place inside imageView
                 let processedImage = UIImage(cgImage: cgImage)
             self.imageView.image = processedImage
@@ -145,7 +153,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             let ac = UIAlertController(title: "Save Error", message: error.localizedDescription, preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "Okay", style: .default))
         } else {
-            let ac = UIAlertController(title: "Saved!", message: "Your filtered image has been saved to your photos", preferredStyle: .alert)
+            let ac = UIAlertController(title: "Image Saved", message: "Your filtered image has been saved to your photos.", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "Okay", style: .default))
             present(ac, animated: true)
         }
