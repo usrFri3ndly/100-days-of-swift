@@ -57,7 +57,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         ac.addAction(UIAlertAction(title: "CIBumpDistortion", style: .default, handler: setFilter))
         ac.addAction(UIAlertAction(title: "CIGaussianBlur", style: .default, handler: setFilter))
         ac.addAction(UIAlertAction(title: "CIPixellate", style: .default, handler: setFilter))
-        ac.addAction(UIAlertAction(title: "CIBSepiaTone", style: .default, handler: setFilter))
+        ac.addAction(UIAlertAction(title: "CISepiaTone", style: .default, handler: setFilter))
         ac.addAction(UIAlertAction(title: "CITwirlDistortion", style: .default, handler: setFilter))
         ac.addAction(UIAlertAction(title: "CIUnsharpMask", style: .default, handler: setFilter))
         ac.addAction(UIAlertAction(title: "CIVignette", style: .default, handler: setFilter))
@@ -90,7 +90,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // save image back to photo library
     @IBAction func save(_ sender: Any) {
         // unwrap image to avoid crashing
-        guard let image = imageView.image else { return }
+        guard let image = imageView.image else {
+            // print("No Image Selected.")
+            let ac = UIAlertController(title: "No Image Found.", message: "Please select an image from your Photo Library by tapping on the '+' button.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Okay", style: .default))
+            present(ac, animated: true)
+            return
+        }
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     
