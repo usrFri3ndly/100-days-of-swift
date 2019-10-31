@@ -103,6 +103,14 @@ class GameScene: SKScene {
             gameOver.position = CGPoint(x: 512, y: 384)
             gameOver.zPosition = 1
             addChild(gameOver)
+            
+            // show final score
+            let finalScore = SKLabelNode(text: "Final Score: \(score)")
+            finalScore.fontSize = 48
+            finalScore.position = CGPoint(x: 512, y: 300)
+            finalScore.zPosition = 1
+            addChild(finalScore)
+            
             return
         }
         
