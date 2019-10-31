@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		825DEBF2236B055100D61CA7 /* whackSpark.sks in Resources */ = {isa = PBXBuildFile; fileRef = 825DEBF1236B055100D61CA7 /* whackSpark.sks */; };
+		825DEBF4236B0B2300D61CA7 /* whackSmoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = 825DEBF3236B0B2300D61CA7 /* whackSmoke.sks */; };
 		82669C4A23676C8900183D16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82669C4923676C8900183D16 /* AppDelegate.swift */; };
 		82669C4C23676C8900183D16 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 82669C4B23676C8900183D16 /* GameScene.sks */; };
 		82669C5023676C8900183D16 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82669C4F23676C8900183D16 /* GameScene.swift */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		825DEBF1236B055100D61CA7 /* whackSpark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = whackSpark.sks; sourceTree = "<group>"; };
+		825DEBF3236B0B2300D61CA7 /* whackSmoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = whackSmoke.sks; sourceTree = "<group>"; };
 		82669C4623676C8900183D16 /* project14.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = project14.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82669C4923676C8900183D16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		82669C4B23676C8900183D16 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -73,6 +77,8 @@
 				82669C5B23676C8C00183D16 /* Info.plist */,
 				82669C6123676D7C00183D16 /* whack.caf */,
 				82669C6223676D7C00183D16 /* whackBad.caf */,
+				825DEBF1236B055100D61CA7 /* whackSpark.sks */,
+				825DEBF3236B0B2300D61CA7 /* whackSmoke.sks */,
 			);
 			path = project14;
 			sourceTree = "<group>";
@@ -137,7 +143,9 @@
 			files = (
 				82669C5523676C8900183D16 /* Main.storyboard in Resources */,
 				82669C4C23676C8900183D16 /* GameScene.sks in Resources */,
+				825DEBF2236B055100D61CA7 /* whackSpark.sks in Resources */,
 				82669C5723676C8C00183D16 /* Assets.xcassets in Resources */,
+				825DEBF4236B0B2300D61CA7 /* whackSmoke.sks in Resources */,
 				82669C5A23676C8C00183D16 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

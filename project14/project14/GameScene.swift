@@ -65,6 +65,14 @@ class GameScene: SKScene {
             if whackSlot.isHit { continue }
             whackSlot.hit()
             
+            // create smoke on enemy tap
+            if let whackSmoke = SKEmitterNode(fileNamed: "whackSmoke") {
+                whackSmoke.position = whackSlot.position
+                whackSmoke.zPosition = 1
+                addChild(whackSmoke)
+            }
+            
+            
             if node.name == "charFriend" {
                 
                 score -= 5
