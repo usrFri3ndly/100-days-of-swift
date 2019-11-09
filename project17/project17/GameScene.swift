@@ -13,6 +13,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var starfield: SKEmitterNode!
     var player: SKSpriteNode!
     var scoreLabel: SKLabelNode!
+    var gameOverLabel: SKLabelNode!
     
     var possibleEnemies = ["ball", "hammer", "tv"]
     var gameTimer: Timer?
@@ -109,13 +110,40 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.position = location
     }
     
+    // game over if player removes finger from screen
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("Finger Lifted!")
+        
+        if !isGameOver {
+            gameOver()
+        }
+        
+    }
+    
     // end game when contact between player and enemy
     func didBegin(_ contact: SKPhysicsContact) {
         let explosion = SKEmitterNode(fileNamed: "explosion")!
         explosion.position = player.position
         addChild(explosion)
         
-        player.removeFromParent()
+        gameOver()
+    }
+    
+    func gameOver() {
+        
         isGameOver = true
+        player.removeFromParent()
+        
+        // shower game over label
+        gameOverLabel = SKLabelNode(fontNamed: "Chalkduster")
+        gameOverLabel.text = "Game Over"
+        gameOverLabel.fontSize = 46
+        gameOverLabel.position = CGPoint(x: 512, y: 384)
+        gameOverLabel.horizontalAlignmentMode = .center
+        addChild(gameOverLabel)
+        
+        // stop enemies from spawning
+        gameTimer?.invalidate()
+        gameTimer = nil
     }
 }
