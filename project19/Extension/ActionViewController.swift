@@ -19,6 +19,7 @@ class ActionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Scripts", style: .plain , target: self, action: #selector(exampleScripts))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
         
         // create observers to catch systems messages
@@ -87,6 +88,33 @@ class ActionViewController: UIViewController {
         
         let selectedRange = script.selectedRange
         script.scrollRangeToVisible(selectedRange)
+    }
+    
+    @objc func exampleScripts() {
+        let ac = UIAlertController(title: "Select Script", message: nil, preferredStyle: .actionSheet)
+        
+        // Show doucment info for current page
+        ac.addAction(UIAlertAction(title: "Show Page Info", style: .default, handler: { [weak self] _ in
+            
+            self?.script.text = """
+            alert(document.title + "\\n" + "\\n" +
+            document.URL + "\\n" + "\\n" +
+            "Type: " + document.doctype.name);
+            """
+        }))
+            
+        // Reduce body text size on current page
+        ac.addAction(UIAlertAction(title: "Reduce Text Size", style: .default, handler: { [weak self] _ in
+            
+            self?.script.text = """
+            document.body.style.fontSize = "xx-small";
+            """
+            
+        }))
+            
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        present(ac, animated: true)
     }
     
 
