@@ -12,6 +12,9 @@ class GameScene: SKScene {
     
     var gameTimer: Timer?
     var fireworks = [SKNode]()
+    var timerCount = 0
+    var gameOverLabel: SKLabelNode!
+    var newGameLabel: SKLabelNode!
     
     // edges of screen
     var leftEdge = -22
@@ -91,6 +94,13 @@ class GameScene: SKScene {
     @objc func launchFireworks () {
         let movementAmount: CGFloat = 1800
         
+        // increment timerCount and end game after specified loops
+        timerCount += 1
+        if timerCount == 6 {
+            gameOver()
+            return
+        }
+        
         switch Int.random(in: 0...3) {
         case 0:
             // launch fireworks straight up
@@ -135,6 +145,16 @@ class GameScene: SKScene {
         // return nodes at touch location
         let nodesAtPoint = nodes(at: location)
         
+        // when label tapped
+        for case let node as SKLabelNode in nodesAtPoint {
+            if node.name == "newGame" {
+                //print("New Game Tapped")
+                newGame()
+                return
+            }
+        }
+        
+        // when node tapped
         for case let node as SKSpriteNode in nodesAtPoint {
             // exit loop if node is not firework
             guard node.name == "firework" else { continue }
@@ -219,6 +239,37 @@ class GameScene: SKScene {
         default:
             score += 4000
         }
+    }
+
+    func gameOver() {
+        
+        gameTimer?.invalidate()
+        gameTimer = nil
+
+        gameOverLabel = SKLabelNode(fontNamed: "ChalkboardSE-Bold")
+        gameOverLabel.text = "Game Over"
+        gameOverLabel.fontSize = 46
+        gameOverLabel.position = CGPoint(x: 512, y: 384)
+        gameOverLabel.horizontalAlignmentMode = .center
+        addChild(gameOverLabel)
+        
+        newGameLabel = SKLabelNode(fontNamed: "ChalkboardSE-Bold")
+        newGameLabel.name = "newGame"
+        newGameLabel.text = "New Game"
+        newGameLabel.fontColor = .green
+        newGameLabel.fontSize = 36
+        newGameLabel.position = CGPoint(x: 512, y: 324)
+        newGameLabel.horizontalAlignmentMode = .center
+        addChild(newGameLabel)
+    }
+    
+    func newGame() {
+        // reset everything for new game
+        score = 0
+        timerCount = 0
+        gameOverLabel.removeFromParent()
+        newGameLabel.removeFromParent()
+        gameTimer = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(launchFireworks), userInfo: nil, repeats: true)
     }
     
 }
