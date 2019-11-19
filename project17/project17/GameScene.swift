@@ -112,7 +112,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // game over if player removes finger from screen
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("Finger Lifted!")
+        //print("Finger Lifted!")
         
         if !isGameOver {
             gameOver()
