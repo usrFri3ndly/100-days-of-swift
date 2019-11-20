@@ -66,11 +66,13 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
         // messages from notifcations get reported back to viewController
         center.delegate = self
         
-        // launch app imediately in foreground
-        let show = UNNotificationAction(identifier: "show", title: "Tell me more...", options: .foreground)
+        // allow user to choose view actions for notification
+        // will run immediately in foreground
+        let firstAction = UNNotificationAction(identifier: "firstAction", title: "I'm Up Already! 🌞", options: .foreground)
+        let secondAction = UNNotificationAction(identifier: "secondAction", title: "No Thanks 😴", options: .foreground)
         
         // wrap in notifcation category
-        let category = UNNotificationCategory(identifier: "alarm", actions: [show], intentIdentifiers: [], options: [])
+        let category = UNNotificationCategory(identifier: "alarm", actions: [firstAction, secondAction], intentIdentifiers: [], options: [])
         center.setNotificationCategories([category])
     }
     
@@ -81,12 +83,16 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
         if let customData = userInfo["customData"] as? String {
             print("Custom data recieved: \(customData)")
             
+            // responses based on users action identifier choice
             switch response.actionIdentifier {
             case UNNotificationDefaultActionIdentifier:
                 // swiped to unlock
                 print("Default identifier")
-            case "show":
-                print("Show more information...")
+                
+            case "firstAction":
+                showAC(message: "👍🏼 Have a fantastic day!")
+            case "secondAction":
+                showAC(message: "👎🏼 I really think you should get up...")
             default:
                 break
             }
@@ -94,6 +100,12 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
         
         completionHandler()
     }
-
+    
+    // run function with passed parameters
+    func showAC(message: String) {
+        let ac = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Done", style: .cancel))
+        present(ac, animated: true)
+    }
 }
 
