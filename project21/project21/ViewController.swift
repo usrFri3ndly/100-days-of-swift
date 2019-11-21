@@ -17,7 +17,7 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
         
         // create navigation items
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Register", style: .plain, target: self, action: #selector(registerLocal))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Schedule", style: .plain, target: self, action: #selector(scheduleLocal))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Schedule", style: .plain, target: self, action: #selector(scheduleTapped))
     }
 
     @objc func registerLocal() {
@@ -34,7 +34,12 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
         }
     }
     
-    @objc func scheduleLocal() {
+    // set initial schedule of 5 seconds when button is tapped
+    @objc func scheduleTapped() {
+        scheduleLocal(interval: 5)
+    }
+    
+    @objc func scheduleLocal(interval: Double) {
         registerCategories()
         
         let center = UNUserNotificationCenter.current()
@@ -49,12 +54,14 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
         content.userInfo = ["customData": "fizzbuzz"]
         content.sound = .default
         
-        // trigger for notification
+        /* trigger for notification
         var dateComponents = DateComponents()
         dateComponents.hour = 10
         dateComponents.minute = 30
-        //let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        //let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true) */
+        
+        // trigger for notification
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
         
         // tie content and trigger together in request
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
@@ -68,11 +75,11 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
         
         // allow user to choose view actions for notification
         // will run immediately in foreground
-        let firstAction = UNNotificationAction(identifier: "firstAction", title: "I'm Up Already! 🌞", options: .foreground)
-        let secondAction = UNNotificationAction(identifier: "secondAction", title: "No Thanks 😴", options: .foreground)
+        let dismiss = UNNotificationAction(identifier: "dismiss", title: "I'm Up Already! 🌞", options: .foreground)
+        let snooze = UNNotificationAction(identifier: "snooze", title: "Snooze [10 Seconds]... 😴", options: .foreground)
         
         // wrap in notifcation category
-        let category = UNNotificationCategory(identifier: "alarm", actions: [firstAction, secondAction], intentIdentifiers: [], options: [])
+        let category = UNNotificationCategory(identifier: "alarm", actions: [dismiss, snooze], intentIdentifiers: [], options: [])
         center.setNotificationCategories([category])
     }
     
@@ -89,10 +96,10 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
                 // swiped to unlock
                 print("Default identifier")
                 
-            case "firstAction":
-                showAC(message: "👍🏼 Have a fantastic day!")
-            case "secondAction":
-                showAC(message: "👎🏼 I really think you should get up...")
+            case "dismiss":
+                showAC(message: "👍🏼 Time to get your Swift on!")
+            case "snooze":
+                scheduleLocal(interval: 10)
             default:
                 break
             }
