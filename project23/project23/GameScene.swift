@@ -51,6 +51,10 @@ class GameScene: SKScene {
     
     var isGameEnded = false
     
+    // magic numbers
+    var xVelocityLow = Int.random(in: 3...5)
+    var xVelocityHigh = Int.random(in: 8...15)
+    
     override func didMove(to view: SKView) {
         let background = SKSpriteNode(imageNamed: "sliceBackground")
         background.position = CGPoint(x: 512, y: 384)
@@ -320,16 +324,17 @@ class GameScene: SKScene {
         enemy.position = randomPosition
     
         let randomAngularVelocity = CGFloat.random(in: -3...3)
+        
         let randomXVelocity: Int
         
         if randomPosition.x < 256 {
-            randomXVelocity = Int.random(in: 8...15)
+            randomXVelocity = xVelocityHigh
         } else if randomPosition.x < 512 {
-            randomXVelocity = Int.random(in: 3...5)
+            randomXVelocity = xVelocityLow
         } else if randomPosition.x < 768 {
-            randomXVelocity = -Int.random(in: 3...5)
+            randomXVelocity = -xVelocityLow
         } else {
-            randomXVelocity = -Int.random(in: 8...15)
+            randomXVelocity = -xVelocityHigh
         }
         
         let randomYVelocity = Int.random(in: 24...32)
