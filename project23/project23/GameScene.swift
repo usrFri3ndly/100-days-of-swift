@@ -21,6 +21,7 @@ enum SequenceType: CaseIterable {
 class GameScene: SKScene {
     
     var gameScore: SKLabelNode!
+    var gameOverLabel: SKLabelNode!
     
     var score = 0 {
         // when score is changed
@@ -217,6 +218,14 @@ class GameScene: SKScene {
             livesImages[1].texture = SKTexture(imageNamed: "sliceLifeGone")
             livesImages[2].texture = SKTexture(imageNamed: "sliceLifeGone")
         }
+        
+        gameOverLabel = SKLabelNode(fontNamed: "Chalkduster")
+        gameOverLabel.text = "Game Over"
+        gameOverLabel.fontSize = 60
+        gameOverLabel.fontColor = .red
+        gameOverLabel.position = CGPoint(x: 512, y: 384)
+        gameOverLabel.horizontalAlignmentMode = .center
+        addChild(gameOverLabel)
     }
     
     func playSwooshSound() {
