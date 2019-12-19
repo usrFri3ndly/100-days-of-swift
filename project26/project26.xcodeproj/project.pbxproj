@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		820F1C8F23A74F8E00D9A90D /* level2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 820F1C8E23A74F8D00D9A90D /* level2.txt */; };
 		82D2A58323A0B91C00AEB980 /* level1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 82D2A58223A0B91C00AEB980 /* level1.txt */; };
 		82E212F3239F84470015D290 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E212F2239F84470015D290 /* AppDelegate.swift */; };
 		82E212F5239F84470015D290 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 82E212F4239F84470015D290 /* GameScene.sks */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		820F1C8E23A74F8D00D9A90D /* level2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level2.txt; sourceTree = "<group>"; };
 		82D2A58223A0B91C00AEB980 /* level1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level1.txt; sourceTree = "<group>"; };
 		82E212EF239F84470015D290 /* project26.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = project26.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82E212F2239F84470015D290 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				82E212FF239F84500015D290 /* Assets.xcassets */,
 				82E21301239F84500015D290 /* LaunchScreen.storyboard */,
 				82D2A58223A0B91C00AEB980 /* level1.txt */,
+				820F1C8E23A74F8D00D9A90D /* level2.txt */,
 				82E21304239F84500015D290 /* Info.plist */,
 			);
 			path = project26;
@@ -133,6 +136,7 @@
 			files = (
 				82D2A58323A0B91C00AEB980 /* level1.txt in Resources */,
 				82E212FE239F84470015D290 /* Main.storyboard in Resources */,
+				820F1C8F23A74F8E00D9A90D /* level2.txt in Resources */,
 				82E212F5239F84470015D290 /* GameScene.sks in Resources */,
 				82E21300239F84500015D290 /* Assets.xcassets in Resources */,
 				82E21303239F84500015D290 /* LaunchScreen.storyboard in Resources */,

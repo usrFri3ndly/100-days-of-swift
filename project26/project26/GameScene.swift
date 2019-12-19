@@ -27,12 +27,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var isGameOver = false
     
     var scoreLabel: SKLabelNode!
+    var levelEndLabel: SKLabelNode!
+    var nextLevelLabel: SKLabelNode!
     
     var score = 0 {
         didSet{
             scoreLabel.text = "Score: \(score)"
         }
     }
+    
+    var currentLevel = 1
     
     override func didMove(to view: SKView) {
         let background = SKSpriteNode(imageNamed: "background")
@@ -49,7 +53,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(scoreLabel)
         
         loadLevel()
-        createPlayer()
         
         physicsWorld.gravity = .zero
         physicsWorld.contactDelegate = self
@@ -62,7 +65,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func loadLevel() {
         // load string from text file
-        guard let levelURL = Bundle.main.url(forResource: "level1", withExtension: "txt") else {
+        guard let levelURL = Bundle.main.url(forResource: "level\(currentLevel)", withExtension: "txt") else {
             fatalError("File not found.")
         }
         guard let levelString = try? String(contentsOf: levelURL) else {
@@ -99,10 +102,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
+        
+        createPlayer()
     }
 
     func createWall(at position: CGPoint ) {
         let node = SKSpriteNode(imageNamed: "block")
+        node.name = "block"
         node.position = position
     
         node.physicsBody = SKPhysicsBody(rectangleOf: node.size)
@@ -145,7 +151,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func createFinish(at position: CGPoint) {
         let node = SKSpriteNode(imageNamed: "finish")
-        node.name = "finished"
+        node.name = "finish"
         node.physicsBody = SKPhysicsBody(circleOfRadius: node.size.width / 2)
         node.physicsBody?.isDynamic = false
         
@@ -242,7 +248,56 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             node.removeFromParent()
             score += 1
         } else if node.name == "finish" {
-            // next level
+            // levelEnd
+            node.removeFromParent()
+            player.removeFromParent()
+            currentLevel += 1
+            
+            levelEnd()
+            
+        }
+    }
+    
+    func levelEnd() {
+        
+        levelEndLabel = SKLabelNode(fontNamed: "ChalkboardSE-Bold")
+        levelEndLabel.text = "Well Done!"
+        levelEndLabel.fontSize = 46
+        levelEndLabel.fontColor = .green
+        levelEndLabel.position = CGPoint(x: 512, y: 384)
+        levelEndLabel.zPosition = 2
+        levelEndLabel.horizontalAlignmentMode = .center
+        addChild(levelEndLabel)
+        
+        nextLevelLabel = SKLabelNode(fontNamed: "ChalkboardSE-Bold")
+        nextLevelLabel.text = "Get Ready for the next level..."
+        nextLevelLabel.fontSize = 36
+        nextLevelLabel.position = CGPoint(x: 512, y: 324)
+        nextLevelLabel.zPosition = 2
+        nextLevelLabel.horizontalAlignmentMode = .center
+        addChild(nextLevelLabel)
+        
+        let timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { timer in
+            self.removeChildren()
+            self.loadLevel()
+        }
+    }
+    
+    // remove assets to continue to next level
+    func removeChildren() {
+        for node in self.children {
+                if node.name == "block" {
+                    node.removeFromParent()
+                } else if node.name == "vortex" {
+                    node.removeFromParent()
+                } else if node.name == "star" {
+                    node.removeFromParent()
+                } else if node.name == "finish" {
+                    node.removeFromParent()
+                }
+            
+            nextLevelLabel.removeFromParent()
+            levelEndLabel.removeFromParent()
         }
     }
 }
