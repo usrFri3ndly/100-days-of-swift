@@ -95,11 +95,15 @@ class ViewController: UIViewController {
         
         // read saved string from keychain and place text in textView
         secret.text = KeychainWrapper.standard.string(forKey: "SecretMessage") ?? ""
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(saveSecretMessage))
     }
     
     @objc func saveSecretMessage() {
         // check if secret is not hidden
         guard secret.isHidden == false else { return }
+        // hide 'done' button
+        navigationItem.setRightBarButton(nil, animated: true)
         
         // write text to keychain
         KeychainWrapper.standard.set(secret.text, forKey: "SecretMessage")
