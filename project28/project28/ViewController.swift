@@ -24,6 +24,9 @@ class ViewController: UIViewController {
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         // run method when user leaves the app
         notificationCenter.addObserver(self, selector: #selector(saveSecretMessage), name: UIApplication.willResignActiveNotification, object: nil)
+        
+        // set default password in keychain
+        KeychainWrapper.standard.set("password", forKey: "thePassword")
     }
 
 
@@ -56,9 +59,37 @@ class ViewController: UIViewController {
             }
         } else {
             // no biometrics
-            let ac = UIAlertController(title: "Biometrics Unavailable", message: "Your device is not configured for biometric authentication.", preferredStyle: .alert)
+            
+            /* let ac = UIAlertController(title: "Biometrics Unavailable", message: "Your device is not configured for biometric authentication.", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true) */
+            
+            let ac = UIAlertController(title: "Biometrics Unavailable", message: "Please enter password", preferredStyle: .alert)
+            ac.addTextField { textField in
+                // ensure password is hidden
+                textField.isSecureTextEntry = true
+            }
+        
+            
+            let submitAction = UIAlertAction(title: "Submit", style: .default)
+            { [weak self, weak ac ] action in
+                guard let password = ac?.textFields?[0].text else { return }
+                
+                    // check if password enters matches password stored in keychain
+                    if password == KeychainWrapper.standard.string(forKey: "thePassword") {
+                        self?.unlockSecretMessage()
+                        return
+                    } else {
+                        let ac = UIAlertController(title: "Invalid Password", message: "The password you entered is incorrect. Please try again.", preferredStyle: .alert)
+                        ac.addAction(UIAlertAction(title: "OK", style: .cancel))
+                        
+                        self?.present(ac, animated: true)
+                }
+            }
+            
+            ac.addAction(submitAction)
             present(ac, animated: true)
+            
         }
     }
     
