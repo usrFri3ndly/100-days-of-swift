@@ -202,6 +202,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.removeFromParent()
         banana.removeFromParent()
         
+        if currentPlayer == 1 {
+            viewController?.p1Score += 1
+        } else {
+            viewController?.p2Score += 1
+        }
+              
+        if viewController?.p1Score == 3 {
+            viewController?.playerNumber.text = "PLAYER ONE WINS !!!"
+            viewController?.p1Score = 0
+            viewController?.p2Score = 0
+        }
+
+        if viewController?.p2Score == 3 {
+            viewController?.playerNumber.text = "PLAYER TWO WINS !!!"
+            viewController?.p1Score = 0
+            viewController?.p2Score = 0
+        }
+        
         // switch to next player shortly after current throw
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             let newGame = GameScene(size: self.size)

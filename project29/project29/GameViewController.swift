@@ -21,10 +21,28 @@ class GameViewController: UIViewController {
     @IBOutlet var launchButton: UIButton!
     @IBOutlet var playerNumber: UILabel!
     
+    @IBOutlet var p1ScoreLabel: UILabel!
+    @IBOutlet var p2ScoreLabel: UILabel!
+    
+    var p1Score: Int = 0 {
+         didSet {
+             p1ScoreLabel.text = "\(p1Score)"
+         }
+     }
+     
+    var p2Score: Int = 0 {
+         didSet {
+             p2ScoreLabel.text = "\(p2Score)"
+         }
+     }
+    
     var currentGame: GameScene?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        p1Score = 0
+        p2Score = 0
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
