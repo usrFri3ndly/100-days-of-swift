@@ -24,6 +24,11 @@ class GameViewController: UIViewController {
     @IBOutlet var p1ScoreLabel: UILabel!
     @IBOutlet var p2ScoreLabel: UILabel!
     
+    @IBOutlet var windLabel: UILabel!
+    
+    var windTimer: Timer?
+    var currentWindSpeed: CGFloat!
+    
     var p1Score: Int = 0 {
          didSet {
              p1ScoreLabel.text = "\(p1Score)"
@@ -67,6 +72,12 @@ class GameViewController: UIViewController {
         // default values for sliders
         angleChanged(self)
         velocityChanged(self)
+        
+        // set initial wind value
+        wind()
+        
+        // change wind direction every 15 seconds
+        windTimer = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(wind), userInfo: nil, repeats: true)
     }
 
     override var shouldAutorotate: Bool {
@@ -121,6 +132,24 @@ class GameViewController: UIViewController {
         velocitySlider.isHidden = false
         velocityLabel.isHidden = false
         launchButton.isHidden = false
+    }
+    
+    @objc func wind() {
+        
+        // get random horizontal gravity
+        currentWindSpeed = CGFloat.random(in: -6...6)
+        currentGame?.physicsWorld.gravity = CGVector(dx: currentWindSpeed, dy: -9.8)
+        
+        // change label state based on strength of wind
+        if currentWindSpeed <= -3 {
+            windLabel.text = "<<< WIND"
+        } else if currentWindSpeed < 0 {
+            windLabel.text = "<< WIND"
+        } else if currentWindSpeed >= 3 {
+           windLabel.text = "WIND >>>"
+        } else if currentWindSpeed > 0 {
+            windLabel.text = "WIND >>"
+        }
     }
     
 }

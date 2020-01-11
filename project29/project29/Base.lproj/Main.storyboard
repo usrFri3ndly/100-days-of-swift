@@ -100,12 +100,19 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WIND" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfw-He-Tm2">
+                                <rect key="frame" x="630.5" y="64" width="44.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="DTC-Mu-QBu" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" constant="24" id="4Vn-ke-Cod"/>
                             <constraint firstItem="HZr-hz-FkL" firstAttribute="leading" secondItem="YKr-5C-GRo" secondAttribute="trailing" constant="37" id="5Cl-Dh-8mu"/>
                             <constraint firstItem="4qk-I5-YsI" firstAttribute="bottom" secondItem="Ac4-rt-pis" secondAttribute="bottom" constant="50" id="5wm-Hy-bns"/>
+                            <constraint firstItem="tfw-He-Tm2" firstAttribute="leading" secondItem="sq4-t8-gMl" secondAttribute="trailing" constant="50" id="BKs-gb-P0b"/>
                             <constraint firstItem="sq4-t8-gMl" firstAttribute="centerX" secondItem="4qk-I5-YsI" secondAttribute="centerX" id="D2w-05-7Ph"/>
                             <constraint firstItem="4qk-I5-YsI" firstAttribute="bottom" secondItem="Ken-1m-3jw" secondAttribute="bottom" constant="50" id="FFH-G3-TDQ"/>
                             <constraint firstItem="YKr-5C-GRo" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" constant="24" id="HH3-oJ-iXO"/>
@@ -121,6 +128,7 @@
                             <constraint firstItem="DTC-Mu-QBu" firstAttribute="leading" secondItem="HZr-hz-FkL" secondAttribute="trailing" constant="7" id="p9m-34-5eh"/>
                             <constraint firstItem="sq4-t8-gMl" firstAttribute="top" secondItem="HZr-hz-FkL" secondAttribute="bottom" constant="14" id="qyv-n2-naf"/>
                             <constraint firstItem="YKr-5C-GRo" firstAttribute="leading" secondItem="8Pb-Tm-wSb" secondAttribute="trailing" constant="7" id="rwh-io-ouI"/>
+                            <constraint firstItem="tfw-He-Tm2" firstAttribute="top" secondItem="HZr-hz-FkL" secondAttribute="bottom" constant="14" id="sgP-wF-dik"/>
                             <constraint firstItem="4qk-I5-YsI" firstAttribute="trailing" secondItem="PPp-j4-PtR" secondAttribute="trailing" constant="40" id="zvc-Yr-J8L"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4qk-I5-YsI"/>
@@ -134,6 +142,7 @@
                         <outlet property="playerNumber" destination="sq4-t8-gMl" id="nGs-xn-mqK"/>
                         <outlet property="velocityLabel" destination="DTC-Mu-QBu" id="DaG-7p-fyF"/>
                         <outlet property="velocitySlider" destination="HZr-hz-FkL" id="UsJ-UR-Nru"/>
+                        <outlet property="windLabel" destination="tfw-He-Tm2" id="UET-Dz-6jF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
