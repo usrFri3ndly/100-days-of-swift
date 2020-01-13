@@ -9,3 +9,8 @@ Projects from my 100 Days of Swift journey!
 [Project 10](https://github.com/usrFri3ndly/100-days-of-swift/tree/master/project10) - Names to Faces  
 [Project 11](https://github.com/usrFri3ndly/100-days-of-swift/tree/master/project11) - Pachinko  
 [Project 13](https://github.com/usrFri3ndly/100-days-of-swift/tree/master/project13) - Instafilter
+[Project 14](https://github.com/usrFri3ndly/100-days-of-swift/tree/master/project14) - Whack-a-Penguin  
+[Project 15](https://github.com/usrFri3ndly/100-days-of-swift/tree/master/project15) - Animation  
+[Project 16](https://github.com/usrFri3ndly/100-days-of-swift/tree/master/project16) - Capital Cities  
+
+
